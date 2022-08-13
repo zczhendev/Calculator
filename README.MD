@@ -14,4 +14,6 @@
 
 算式计算：构建二叉树之后使用深度优先算法遍历，根据运算符返回左右两个节点的运算结果
 
+具体实现步骤可查看`io.zczhendev.calculator.utils.calculate.Calculator`类
+
 ## 2、UI实现
