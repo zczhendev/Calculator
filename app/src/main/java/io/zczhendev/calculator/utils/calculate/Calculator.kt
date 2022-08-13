@@ -1,12 +1,12 @@
 package io.zczhendev.calculator.utils.calculate
 
 import io.zczhendev.calculator.utils.calculate.exception.UnsupportedOperatorException
+import io.zczhendev.calculator.utils.calculate.key.FunctionKey
 import io.zczhendev.calculator.utils.calculate.key.Key
 import io.zczhendev.calculator.utils.calculate.key.NumberKey
 import io.zczhendev.calculator.utils.calculate.key.OperatorKey
 import java.util.*
 import java.util.concurrent.BlockingQueue
-import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.LinkedBlockingQueue
 import kotlin.math.pow
 
@@ -27,6 +27,13 @@ class Calculator(callback: Callback) {
      * 按下一个按键
      */
     fun keyDown(key: Key) {
+        if (key is FunctionKey) {
+            if (key == FunctionKey.KEY_CLEAR) {
+                allClear()
+                return
+            }
+            return
+        }
         keyQueue.put(key)
     }
 
@@ -109,8 +116,7 @@ class Calculator(callback: Callback) {
             var rootNote: TreeNode? = null
             while (!queue.isEmpty()) {
                 // 根据队列节点创建二叉树节点
-                val queueNode = queue.poll()
-                val node = when (queueNode) {
+                val node = when (val queueNode = queue.poll()) {
                     is NumberQueueNode -> {
                         NumberTreeNode(queueNode.number)
                     }

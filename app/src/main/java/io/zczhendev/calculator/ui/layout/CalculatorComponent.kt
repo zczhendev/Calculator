@@ -19,12 +19,12 @@ import io.zczhendev.calculator.utils.calculate.key.NumberKey
 import io.zczhendev.calculator.utils.calculate.key.OperatorKey
 
 @Composable
-fun CalculatorKeyboard(onKeyDown: (key: Key) -> Unit) {
+fun CalculatorKeyboard(
+    modifier: Modifier = Modifier,
+    onKeyDown: (key: Key) -> Unit
+) {
     Surface(
-        Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(10.dp),
+        modifier = modifier,
         color = Color.Transparent
     ) {
         Column {
